@@ -1,0 +1,35 @@
+# Build artifacts
+*.o
+*.obj
+*.so
+*.apk
+*.ap_ 
+*.dex
+*.class
+
+# Gradle
+.gradle
+/build
+
+# Android Studio
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated files
+out/
+
+# Local config
+local.properties
+
+# TWRP / recovery artifacts
+recovery/root/*
+
+# logs
+*.log
+
+# ignore prebuilt kernel binary if you don't want it in git
+/prebuilt/kernel
