@@ -57,9 +57,8 @@ PRODUCT_PACKAGES += \
 # Boot Control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-mtkimpl.recovery \
-    android.hardware.boot@1.2-mtkimpl
-
-PRODUCT_PACKAGES_DEBUG += \
+    android.hardware.boot@1.2-mtkimpl \
+    bootctrl.recovery \
     bootctrl
 
 # Fastbootd
@@ -71,14 +70,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     mtk_plpath_utils.recovery
 
-PRODUCT_PACKAGES_DEBUG += \
-    update_engine_client
-
 PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh \
-    update_engine \
-    update_verifier \
     update_engine_sideload
 
 # HACK: Set vendor patch level

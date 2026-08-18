@@ -20,11 +20,11 @@ on:
       DEVICE_TREE:
         description: 'OrangeFox Device Tree'
         required: true
-        default: 'https://github.com/ardrag0n/device_infinix_X6831'
+        default: 'https://github.com/jhonneiber/device_infinix_X6831'
       DEVICE_TREE_BRANCH:
         description: 'OrangeFox Device Tree Branch'
         required: true
-        default: 'fox_12.1'
+        default: '12.1'
       DEVICE_PATH:
         description: 'Specify your Device Path'
         required: true
@@ -76,8 +76,8 @@ jobs:
       run: |
         mkdir -p ${GITHUB_WORKSPACE}/OrangeFox
         cd ${GITHUB_WORKSPACE}/OrangeFox
-        git config --global user.name "thequantumcog"
-        git config --global user.email "ar0177417@gmail.com"
+        git config --global user.name "Jhonneiber18"
+        git config --global user.email "jhonneiber18@gmail.com"
         git clone https://gitlab.com/OrangeFox/sync.git -b master
         cd sync
         ./orangefox_sync.sh --branch ${{ github.event.inputs.MANIFEST_BRANCH }} --path ${GITHUB_WORKSPACE}/OrangeFox/fox_${{ github.event.inputs.MANIFEST_BRANCH }}
@@ -95,8 +95,33 @@ jobs:
         set +e
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
+        export OF_USE_LZMA_COMPRESSION=1
+        export OF_DISABLE_MIUI_SPECIFIC_FEATURES=1
+        export OF_DONT_PATCH_ON_FRESH_INSTALLATION=1
+        export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
+        export OF_NO_SPLASH_CHANGE=1
+        export OF_USE_MAGISKBOOT=1
+        export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
+        export OF_DONT_KEEP_LOG_HISTORY=1
+        export OF_SKIP_MULTIUSER=1
+        export OF_ENABLE_LPTOOLS=1
+        export OF_DISABLE_DM_VERITY_FORCED_ENCRYPTION=1
+        export OF_SUPPORT_ALL_BLOCK_OTA_UPDATES=1
+        export OF_FIX_OTA_UPDATE_MANUAL_FLASHING=1
+        export OF_SCREEN_H=2460
+        export OF_STATUS_H=90
+        export OF_STATUS_INDENT_LEFT=48
+        export OF_STATUS_INDENT_RIGHT=48
+        export OF_ALLOW_DISABLE_NAVBAR=0
+        export OF_QUICK_BACKUP_LIST="/boot;/data;"
+        export OF_FLASHLIGHT_ENABLE=0
+        export OF_MAINTAINER="Jhonneiber18"
+        export FOX_VERSION="R12.1"
+        export FOX_BUILD_TYPE="Unofficial"
         set -e
-        lunch twrp_${{ github.event.inputs.DEVICE_NAME }}-eng && make clean && mka adbd ${{ github.event.inputs.BUILD_TARGET }}image
+        lunch fox_${{ github.event.inputs.DEVICE_NAME }}-eng || lunch twrp_${{ github.event.inputs.DEVICE_NAME }}-eng
+        make clean
+        mka adbd ${{ github.event.inputs.BUILD_TARGET }}image
 
     - name: Set Release Properties
       run: |

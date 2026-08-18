@@ -14,7 +14,7 @@ on:
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
-        default: 'https://github.com/thequantumcog/device_infinix_X6831'
+        default: 'https://github.com/jhonneiber/device_infinix_X6831'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
@@ -109,8 +109,8 @@ jobs:
         mkdir workspace
         cd workspace
         echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
-        git config --global user.name "thequantumcog"
-        git config --global user.email "thequantumcog@protonmail.com"
+        git config --global user.name "Jhonneiber18"
+        git config --global user.email "jhonneiber18@gmail.com"
         repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
       id: pwd
 
