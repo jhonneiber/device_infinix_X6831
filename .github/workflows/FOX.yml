@@ -67,9 +67,10 @@ jobs:
     - name: Build Environment
       run: |
         sudo apt install aria2 -y
-        git clone https://gitlab.com/OrangeFox/misc/scripts.git -b master
-        cd scripts
+        git clone https://gitlab.com/OrangeFox/misc/scripts.git -b master of_scripts
+        cd of_scripts
         sudo bash setup/android_build_env.sh
+        cd ${GITHUB_WORKSPACE}
       
     - name: Set-up Manifest
       if: github.event.inputs.MANIFEST_BRANCH == '11.0' || github.event.inputs.MANIFEST_BRANCH == '12.1'
@@ -78,8 +79,8 @@ jobs:
         cd ${GITHUB_WORKSPACE}/OrangeFox
         git config --global user.name "Jhonneiber18"
         git config --global user.email "jhonneiber18@gmail.com"
-        git clone https://gitlab.com/OrangeFox/sync.git -b master
-        cd sync
+        git clone https://gitlab.com/OrangeFox/sync.git -b master of_sync
+        cd of_sync
         ./orangefox_sync.sh --branch ${{ github.event.inputs.MANIFEST_BRANCH }} --path ${GITHUB_WORKSPACE}/OrangeFox/fox_${{ github.event.inputs.MANIFEST_BRANCH }}
 
     - name: Clone Device Tree
